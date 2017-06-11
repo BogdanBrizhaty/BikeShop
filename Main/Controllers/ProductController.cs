@@ -11,16 +11,22 @@ namespace Main.Controllers
     public class ProductController : ApiController
     {
         AdventureWorksDBEntities dbe = new AdventureWorksDBEntities();
+        int _perPage = 10;
         // GET api/<controller>
         [HttpGet]
         [Route("api/Product/page/{page}")]
         //[Route("api/Product/page")]
         [Route("api/Product/")]
-        public IEnumerable<string> Get(int page = 1)
+        public IEnumerable<ProductInfo> Get(uint page = 1)
         {
-            //var 
-            //return 
-            return new string[] { "value1", "value2" };
+            var result = dbe.Product.Select(p => new ProductInfo
+            {
+                Id = p.ProductID,
+                Name = p.Name,
+                Price = p.ListPrice,
+                Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto
+            }).ToList().OrderBy(p => p.Id);
+            return (page == 1) ? result.Take(_perPage) : result.Skip(((int)page - 1) * _perPage).Take(_perPage);
         }
 
         // GET api/<controller>/5
