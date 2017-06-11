@@ -18,6 +18,11 @@
         <AssociationConnector Association="AdventureWorksDBModel.FK_ProductProductPhoto_Product_ProductID" ManuallyRouted="false" />
         <AssociationConnector Association="AdventureWorksDBModel.FK_ProductSubcategory_ProductCategory_ProductCategoryID" ManuallyRouted="false" />
         <AssociationConnector Association="AdventureWorksDBModel.FK_ProductProductPhoto_ProductPhoto_ProductPhotoID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AdventureWorksDBModel.Culture" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="AdventureWorksDBModel.ProductModelProductDescriptionCulture" Width="1.5" PointX="8.25" PointY="2.5" />
+        <AssociationConnector Association="AdventureWorksDBModel.FK_ProductModelProductDescriptionCulture_Culture_CultureID" />
+        <AssociationConnector Association="AdventureWorksDBModel.FK_ProductModelProductDescriptionCulture_ProductDescription_ProductDescriptionID" />
+        <AssociationConnector Association="AdventureWorksDBModel.FK_ProductModelProductDescriptionCulture_ProductModel_ProductModelID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

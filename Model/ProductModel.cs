@@ -18,6 +18,7 @@ namespace Model
         public ProductModel()
         {
             this.Product = new HashSet<Product>();
+            this.ProductModelProductDescriptionCulture = new HashSet<ProductModelProductDescriptionCulture>();
         }
     
         public int ProductModelID { get; set; }
@@ -29,5 +30,7 @@ namespace Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture { get; set; }
     }
 }

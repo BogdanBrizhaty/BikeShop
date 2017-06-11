@@ -66,6 +66,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdventureWorksDb.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Culture.cs">
+      <DependentUpon>AdventureWorksDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
@@ -77,6 +80,9 @@
     </Compile>
     <Compile Include="ProductInfo.cs" />
     <Compile Include="ProductModel.cs">
+      <DependentUpon>AdventureWorksDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductModelProductDescriptionCulture.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductPhoto.cs">

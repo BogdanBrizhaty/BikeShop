@@ -20,5 +20,7 @@ namespace Model
         public byte[] Thumbnail { get; set; }
         [DataMember]
         public byte[] FullScale { get; set; }
+        [DataMember]
+        public string Description { get; set; }
     }
 }

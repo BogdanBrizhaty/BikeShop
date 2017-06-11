@@ -33,5 +33,7 @@ namespace Model
         public virtual DbSet<ProductProductPhoto> ProductProductPhoto { get; set; }
         public virtual DbSet<ProductSubcategory> ProductSubcategory { get; set; }
         public virtual DbSet<SalesOrderDetail> SalesOrderDetail { get; set; }
+        public virtual DbSet<Culture> Culture { get; set; }
+        public virtual DbSet<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture { get; set; }
     }
 }

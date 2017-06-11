@@ -26,9 +26,18 @@ namespace Main.Controllers
         // GET api/<controller>/5
         [HttpGet]
         [Route("api/Product/{id}")]
-        public string Get(int id, [FromUri]string lang = "en")
+        public ProductInfo Get(int id, [FromUri]string lang = "en")
         {
-            return id.ToString() + " " + lang;
+            return dbe.Product
+                .Where(p => p.ProductModel.ProductModelProductDescriptionCulture.FirstOrDefault().CultureID == lang)
+                .Select(p => new ProductInfo
+                {
+                    Id = p.ProductID,
+                    Name = p.Name,
+                    Description = p.ProductModel.ProductModelProductDescriptionCulture.FirstOrDefault().ProductDescription.Description,
+                    Price = p.ListPrice,
+                    FullScale = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.LargePhoto
+                }).FirstOrDefault();
         }
         [HttpGet]
         [Route("api/product/search")]
