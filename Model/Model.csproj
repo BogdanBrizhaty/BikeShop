@@ -75,6 +75,7 @@
     <Compile Include="ProductDescription.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductInfo.cs" />
     <Compile Include="ProductModel.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>

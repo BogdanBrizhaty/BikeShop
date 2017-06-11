@@ -18,6 +18,11 @@ namespace Main
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            //routes.MapRoute(
+            //    name: "Product",
+            //    url: "product/top/{amount}",
+            //    defaults: new { amount = UrlParameter.Optional }
+            //);
         }
     }
 }
