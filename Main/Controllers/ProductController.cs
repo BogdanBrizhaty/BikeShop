@@ -12,10 +12,9 @@ namespace Main.Controllers
     {
         AdventureWorksDBEntities dbe = new AdventureWorksDBEntities();
         int _perPage = 10;
-        // GET api/<controller>
+
         [HttpGet]
         [Route("api/Product/page/{page}")]
-        //[Route("api/Product/page")]
         [Route("api/Product/")]
         public IEnumerable<ProductInfo> Get(uint page = 1)
         {
@@ -25,11 +24,10 @@ namespace Main.Controllers
                 Name = p.Name,
                 Price = p.ListPrice,
                 Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto
-            }).ToList().OrderBy(p => p.Id);
-            return (page == 1) ? result.Take(_perPage) : result.Skip(((int)page - 1) * _perPage).Take(_perPage);
+            }).OrderBy(p => p.Id);
+            return ((page == 1) ? result.Take(_perPage) : result.Skip(((int)page - 1) * _perPage).Take(_perPage));
         }
 
-        // GET api/<controller>/5
         [HttpGet]
         [Route("api/Product/{id}")]
         public ProductInfo Get(int id, [FromUri]string lang = "en")
@@ -45,12 +43,24 @@ namespace Main.Controllers
                     FullScale = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.LargePhoto
                 }).FirstOrDefault();
         }
+
         [HttpGet]
         [Route("api/product/search")]
-        public string Search([FromUri]string q)
+        public IEnumerable<ProductInfo> Search([FromUri]string q, [FromUri]uint page = 1)
         {
-            return q;
+            var result = dbe.Product
+                .Where(p => p.Name.ToLower().Contains(q.ToLower()))
+                .Select(p => new ProductInfo
+                {
+                    Id = p.ProductID,
+                    Name = p.Name,
+                    Price = p.ListPrice,
+                    Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto
+                }).OrderBy(p => p.Id);
+
+            return (page == 1) ? result.Take(_perPage) : result.Skip(((int)page - 1) * _perPage).Take(_perPage);
         }
+
         [HttpGet]
         [Route("api/Product/top/{amount}")]
         [Route("api/Product/top")]
