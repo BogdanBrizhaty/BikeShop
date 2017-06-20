@@ -32,7 +32,9 @@ namespace Main
             bundles.Add(new ScriptBundle("~/bundles/ClientApp").Include(
                       "~/Client/app.js",
                       "~/Client/RouteConfig.js")
-                      .IncludeDirectory("~/Client/Controllers", "*Controller.js"));
+                      .IncludeDirectory("~/Client/Controllers", "*Controller.js")
+                      .IncludeDirectory("~/Client/Services", "*.js")
+                      );
         }
     }
 }
