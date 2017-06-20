@@ -1,7 +1,8 @@
 #1 PAGING BUGFIX
 	if number of result are less then one page, it returns an error, need to fix this in all actions that have PAGE parameter
 
-	OK
+	OK.
+	Result is casted from IOrdered to List<Product>.
 
 
 #2 

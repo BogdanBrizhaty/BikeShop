@@ -23,6 +23,16 @@ namespace Main
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular.min")
+                      .IncludeDirectory("~/Scripts/", "angular.*")
+                      .IncludeDirectory("~/Scripts/", "angular-*")
+                      );
+
+            bundles.Add(new ScriptBundle("~/bundles/ClientApp").Include(
+                      "~/Client/app.js",
+                      "~/Client/RouteConfig.js")
+                      .IncludeDirectory("~/Client/Controllers", "*Controller.js"));
         }
     }
 }

@@ -14,8 +14,8 @@ namespace Main.Controllers
         int _perPage = 10;
 
         [HttpGet]
-        [Route("api/Product/page/{page}")]
-        [Route("api/Product/")]
+        [Route("api/Products/page/{page}")]
+        [Route("api/Products/")]
         public IEnumerable<ProductInfo> Get(uint page = 1)
         {
             var result = dbe.Product.Select(p => new ProductInfo
@@ -29,7 +29,7 @@ namespace Main.Controllers
         }
 
         [HttpGet]
-        [Route("api/Product/{id}")]
+        [Route("api/Products/{id}")]
         public ProductInfo Get(int id, [FromUri]string lang = "en")
         {
             return dbe.Product
@@ -45,7 +45,7 @@ namespace Main.Controllers
         }
 
         [HttpGet]
-        [Route("api/product/search")]
+        [Route("api/products/search")]
         public IEnumerable<ProductInfo> Search([FromUri]string q, [FromUri]uint page = 1)
         {
             var result = dbe.Product
@@ -62,8 +62,8 @@ namespace Main.Controllers
         }
 
         [HttpGet]
-        [Route("api/Product/top/{amount}")]
-        [Route("api/Product/top")]
+        [Route("api/Products/top/{amount}")]
+        [Route("api/Products/top")]
         public IEnumerable<ProductInfo> GetTop(int amount = 5)
         {
             var allBikeIds = dbe.Product
