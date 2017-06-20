@@ -14,6 +14,7 @@ namespace Main.Controllers
         int _perPage = 10;
 
         [HttpGet]
+        [HttpHead]
         [Route("api/Products/page/{page}")]
         [Route("api/Products/")]
         public IEnumerable<ProductInfo> Get(uint page = 1)
@@ -25,6 +26,12 @@ namespace Main.Controllers
                 Price = p.ListPrice,
                 Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto
             }).OrderBy(p => p.Id);
+
+            var totalItems = dbe.Product.Count();
+            Request.Properties["X-total-items"] = totalItems.ToString();
+            Request.Properties["X-total-pages"] = ((int)(totalItems / _perPage) + 1).ToString();
+            Request.Properties["X-current-page"] = page.ToString();
+
             return ((page == 1) ? result.Take(_perPage) : result.Skip(((int)page - 1) * _perPage).Take(_perPage));
         }
 
@@ -45,6 +52,7 @@ namespace Main.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         [Route("api/products/search")]
         public IEnumerable<ProductInfo> Search([FromUri]string q, [FromUri]uint page = 1)
         {
@@ -57,6 +65,11 @@ namespace Main.Controllers
                     Price = p.ListPrice,
                     Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto
                 }).OrderBy(p => p.Id);
+
+            var totalItems = result.Count();
+            Request.Properties["X-total-items"] = totalItems.ToString();
+            Request.Properties["X-total-pages"] = ((int)(totalItems / _perPage) + 1).ToString();
+            Request.Properties["X-current-page"] = page.ToString();
 
             return (page == 1) ? result.Take(_perPage) : result.Skip(((int)page - 1) * _perPage).Take(_perPage);
         }
