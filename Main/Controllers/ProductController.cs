@@ -24,7 +24,8 @@ namespace Main.Controllers
                 Id = p.ProductID,
                 Name = p.Name,
                 Price = p.ListPrice,
-                Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto
+                Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto,
+                Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description//.ProductDescription.Description
             }).OrderBy(p => p.Id);
 
             var totalItems = dbe.Product.Count();
@@ -45,7 +46,7 @@ namespace Main.Controllers
                 {
                     Id = p.ProductID,
                     Name = p.Name,
-                    Description = p.ProductModel.ProductModelProductDescriptionCulture.FirstOrDefault().ProductDescription.Description,
+                    Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description,
                     Price = p.ListPrice,
                     FullScale = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.LargePhoto
                 }).FirstOrDefault();
@@ -63,7 +64,8 @@ namespace Main.Controllers
                     Id = p.ProductID,
                     Name = p.Name,
                     Price = p.ListPrice,
-                    Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto
+                    Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto,
+                    Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description//.ProductDescription.Description
                 }).OrderBy(p => p.Id);
 
             var totalItems = result.Count();
@@ -100,7 +102,8 @@ namespace Main.Controllers
                         Name = p.Name,
                         Price = p.ListPrice,
                         Thumbnail = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto,
-                        FullScale = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.LargePhoto
+                        FullScale = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.LargePhoto,
+                        Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description//.ProductDescription.Description
                     }
                 ).ToList();
             return result;
