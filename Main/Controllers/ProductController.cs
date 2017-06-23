@@ -41,7 +41,7 @@ namespace Main.Controllers
         public ProductInfo Get(int id, [FromUri]string lang = "en")
         {
             return dbe.Product
-                .Where(p => p.ProductModel.ProductModelProductDescriptionCulture.FirstOrDefault().CultureID == lang)
+                .Where(p => p.ProductModel.ProductModelProductDescriptionCulture.FirstOrDefault().CultureID == lang && p.ProductID == id)
                 .Select(p => new ProductInfo
                 {
                     Id = p.ProductID,
