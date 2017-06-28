@@ -3,19 +3,23 @@
         templateUrl: 'Client/Views/Home.html',
         Controller: 'HomeController'
     });
-    $routeProvider.when('/products/page/:pageNumber', {
-        templateUrl: 'Views/Home.html',
-        Controller: 'ProductController'
-    });
-    $routeProvider.when('/products/', {
-        templateUrl: '/products/page/1'
-    });
+    //$routeProvider.when('/products', {
+    //    redirectTo: '/products/page/1'
+    //});
+    //$routeProvider.when('/products/page', {
+    //    redirectTo: '/products/page/1'
+    //});
     $routeProvider.when('/products/:id', {
-        templateUrl: 'Views/ProductView.html',
-        Controller: 'ProductController'
+        templateUrl: 'Client/Views/Product.html',
+        Controller: 'ProductController' 
+    });
+    $routeProvider.when('/products', {
+        //$routeProvider.when('/products/page/:pageNumber', {
+        templateUrl: 'Client/Views/Products.html',
+        Controller: 'ProductsController'
     });
     $routeProvider.when('/search/:q', {
-        templateUrl: 'Views/Home.html',
+        templateUrl: 'Client/Views/Search.html',
         Controller: 'SearchController'
     });
 }])

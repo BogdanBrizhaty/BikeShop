@@ -1,0 +1,21 @@
+﻿<div ng-controller="ProductListController">
+    <div class="row top-inside-free-space" ng-repeat="product in ProductList">
+        <div class="col-md-2 col-sm-2 col-xs-2 text-center"><img class="img-thumbnail" ng-src="data:image/jpg;base64,{{product.Thumbnail}}" /></div>
+        <div class="col-md-2 col-sm-2 col-xs-3 left-border text-left"><a class="btn-link" href="/#!/products/{{product.Id}}">{{product.Name}}</a></div>
+        <div class="col-md-1 col-sm-1 col-xs-1 left-border text-right"><span>{{product.Price}}</span></div>
+        <div class="col-md-7 col-sm-7 col-xs-6 left-border text-center"><span>{{ (product.Description === null) ? "No description available" : product.Description}}</span></div>
+    </div>
+    <!--<div class="row">
+        <button class="btn btn-default"></button>
+    </div>-->
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a ng-click="showPreviousPages()">&laquo;</a></li>
+            <li ng-repeat="pageNum in pages"
+                ng-class="pageNum == currentPage ? 'active' : ''">
+                <a ng-click="goToPage(pageNum)">{{pageNum}}</a></li>
+            <li><a ng-click="showNextPages()" >&raquo;</a></li>
+        </ul>
+    </div>
+    <!--<ul uib-pagination total-items="totalItems" ng-model="currentPage"> (pageNum < 10) ? '&nbsp;' + pageNum + '&nbsp;' :  </ul>-->
+</div>

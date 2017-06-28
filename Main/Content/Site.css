@@ -1,17 +1,57 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;
+    padding-right: 15px;*/
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
+}
+
+.top-free-space {
+    margin-top: 5px;
+}
+
+.top-inside-free-space {
+    padding-top: 5px;
+}
+
+.side-bordered {
+    border: 1px solid lightgray;
+    border-top: none;
+    border-bottom: none;
+}
+.left-border {
+    border-left: 1px solid lightgray;
+}
+.right-border {
+    border-right: 1px solid lightgray;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.row > [class*='col-'] img {
+	 display: flex;
+	 flex-direction: column;
+}
+.navbar-header, .navbar-brand {
+    color: white;
+}
+.navbar-brand:hover {
+    cursor: default;
+}
+.pagination > li > a {
+    min-width: 45px;
+    cursor: pointer;
 }
