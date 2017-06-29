@@ -69,6 +69,8 @@
     <Compile Include="Culture.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Abstract\IDataService.cs" />
+    <Compile Include="Abstract\IProductService.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
@@ -78,7 +80,7 @@
     <Compile Include="ProductDescription.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductInfo.cs" />
+    <Compile Include="Concrete\ProductInfo.cs" />
     <Compile Include="ProductModel.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
@@ -91,6 +93,7 @@
     <Compile Include="ProductProductPhoto.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Concrete\ProductService.cs" />
     <Compile Include="ProductSubcategory.cs">
       <DependentUpon>AdventureWorksDb.tt</DependentUpon>
     </Compile>
@@ -127,6 +130,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
