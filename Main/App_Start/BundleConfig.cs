@@ -17,11 +17,11 @@ namespace Main
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular.min")
@@ -32,8 +32,9 @@ namespace Main
             bundles.Add(new ScriptBundle("~/bundles/ClientApp").Include(
                       "~/Client/app.js",
                       "~/Client/RouteConfig.js")
-                      .IncludeDirectory("~/Client/Controllers", "*Controller.js")
                       .IncludeDirectory("~/Client/Services", "*.js")
+                      .IncludeDirectory("~/Client/Directives", "*.js")
+                      .IncludeDirectory("~/Client/Controllers", "*Controller.js")
                       );
         }
     }
