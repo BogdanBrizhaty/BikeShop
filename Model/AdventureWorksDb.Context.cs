@@ -15,11 +15,25 @@ namespace Model
     
     public partial class AdventureWorksDBEntities : DbContext
     {
-        public AdventureWorksDBEntities()
+        //public AdventureWorksDBEntities()
+        //    : base("name=AdventureWorksDBEntities")
+        //{
+        //}
+        private static AdventureWorksDBEntities _instance = null;
+        public static AdventureWorksDBEntities Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new AdventureWorksDBEntities();
+                return _instance;
+            }
+        }
+        private AdventureWorksDBEntities()
             : base("name=AdventureWorksDBEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

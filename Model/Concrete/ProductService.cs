@@ -15,7 +15,7 @@ namespace Model
         AdventureWorksDBEntities _db;
         public ProductService()
         {
-            _db = new AdventureWorksDBEntities();
+            _db = AdventureWorksDBEntities.Instance;//new AdventureWorksDBEntities();
         }
         public long Count { get { return _db.Product.Count(); } }
 
@@ -43,6 +43,13 @@ namespace Model
         public IEnumerable<ProductInfo> Get(int portion, int startAt, string lang)
         {
             // need to check if portion is bigger than data amount, if startAt is bigger than data amount
+            var dataAmount = _db.Product.Count();
+
+            if (startAt > dataAmount)
+                throw new ArgumentOutOfRangeException("startAt", "position is out of boundary of the list of products");
+
+            if (dataAmount - startAt < portion)
+                throw new ArgumentException("portion", "amount is out of boundary of the list of products");
 
             return _db.Product
                 .Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang))
