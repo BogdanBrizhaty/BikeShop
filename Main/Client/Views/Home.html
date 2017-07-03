@@ -1,4 +1,9 @@
-﻿<div ng-controller="HomeController">
-    <p> first paragraph</p>
-    <p>second paragdraph with msg: {{Message}}</p>
+﻿<div ng-controller="HomeController" >
+    <p class="h2">Our most popular bikes</p>
+    <div class="row top-inside-free-space" ng-repeat="product in Products">
+        <div class="col-md-2 text-center"><img class="img-thumbnail" ng-src="data:image/jpg;base64,{{product.Img}}" /></div>
+        <div class="col-md-2 left-border"><a class="btn-link" href="/#!/products/{{product.Id}}">{{product.Name}}</a></div>
+        <div class="col-md-1 left-border"><span class="text-right">{{product.Price}}</span></div>
+        <div class="col-md-7 left-border"><span class="text-left">{{product.Description}}</span></div>
+    </div>
 </div>

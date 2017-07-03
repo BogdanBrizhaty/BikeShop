@@ -1,0 +1,8 @@
+﻿<div ng-controller="ProductController">
+    <div class="row table-bordered">
+        <div class="col-md-4 text-center"><img class="img-rounded" ng-src="data:image/jpg;base64,{{ProductInfo.Img}}" /></div>
+        <div class="col-md-2 left-border text-left"><span>{{ProductInfo.Name}}</span></div>
+        <div class="col-md-1 left-border text-right"><span>{{ProductInfo.Price}}</span></div>
+        <div class="col-md-5 left-border text-left"><span>{{(ProductInfo.Description === null) ? "No description available" : ProductInfo.Description}}</span></div>
+    </div>
+</div>
