@@ -18,9 +18,9 @@ namespace Main.Filters
             var totalPages = actionExecutedContext.Request.Properties["X-total-pages"];
             var curPage = actionExecutedContext.Request.Properties["X-current-page"];
 
-            actionExecutedContext.Response.Content.Headers.Add("X-total-items", (string)totalItems);
-            actionExecutedContext.Response.Content.Headers.Add("X-total-pages", (string)totalPages);
-            actionExecutedContext.Response.Content.Headers.Add("X-current-page", (string)curPage);
+            actionExecutedContext.Response.Content.Headers.Add("X-total-items", totalItems.ToString());
+            actionExecutedContext.Response.Content.Headers.Add("X-total-pages", totalPages.ToString());
+            actionExecutedContext.Response.Content.Headers.Add("X-current-page", curPage.ToString());
         }
     }
 }
