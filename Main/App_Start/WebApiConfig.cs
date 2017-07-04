@@ -11,6 +11,7 @@ namespace Main
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.Filters.Add(new ProductsMetadataHeaderFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -18,10 +19,10 @@ namespace Main
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new { action="Get", id = RouteParameter.Optional }
             );
 
-            config.Filters.Add(new ProductsMetadataHeaderFilter());
+
         }
     }
 }
