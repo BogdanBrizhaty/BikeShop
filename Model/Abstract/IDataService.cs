@@ -12,7 +12,7 @@ namespace Model
         bool Remove(int Id);
         bool Add(T entity);
         bool Update(int oldId, T entity);
-        long Count { get; }
+        int Count { get; }
         void Dispose();
     }
 }

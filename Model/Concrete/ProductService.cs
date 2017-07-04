@@ -15,10 +15,9 @@ namespace Model
         AdventureWorksDBEntities _db;
         public ProductService()
         {
-            _db = AdventureWorksDBEntities.Instance;//new AdventureWorksDBEntities();
+            _db = AdventureWorksDBEntities.Instance;
         }
-        public long Count { get { return _db.Product.Count(); } }
-
+        public int Count { get { return _db.Product.Count(); } }
 
         // IProductService
         #region IProductService implementation
@@ -31,7 +30,16 @@ namespace Model
         public IEnumerable<ProductInfo> GetAll(string lang)
         {
             return _db.Product
-                .Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang));
+                .Select(p =>
+                   new ProductInfo()
+                   {
+                       Id = p.ProductID,
+                       Name = p.Name,
+                       Price = p.ListPrice,
+                       Img = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto,
+                       Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description//.ProductDescription.Description
+                   }
+                );
         }
 
         /// <summary>
@@ -49,12 +57,25 @@ namespace Model
                 throw new ArgumentOutOfRangeException("startAt", "position is out of boundary of the list of products");
 
             if (dataAmount - startAt < portion)
-                throw new ArgumentException("portion", "amount is out of boundary of the list of products");
+                portion = dataAmount - startAt;
+                //throw new ArgumentException("portion", "amount is out of boundary of the list of products");
 
             return _db.Product
-                .Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang))
+                .Select(p =>
+                   new ProductInfo()
+                   {
+                       Id = p.ProductID,
+                       Name = p.Name,
+                       Price = p.ListPrice,
+                       Img = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto,
+                       Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description//.ProductDescription.Description
+                   }
+                )
+                .OrderBy(p => p.Id)
+                //.Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang))
                 .Skip(startAt)
-                .Take(portion);
+                .Take(portion)
+                .ToList();
         }
         /// <summary>
         /// Returns a product with given ProductId
@@ -76,7 +97,6 @@ namespace Model
         /// Returns top amount of most popular bikes buyed by users
         /// </summary>
         /// <param name="amount">Number of bikes to select</param>
-        /// <param name="lang">language for product description</param>
         /// <returns></returns>
         public IEnumerable<ProductInfo> GetMostBuyableBikes(int amount, string lang)
         {
@@ -99,23 +119,51 @@ namespace Model
 
             return _db.Product
                 .Where(p => mostPopulardBikeIds.Contains(p.ProductID))
-                .Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang));
+                //.ToList()
+                .Select(p =>
+                   new ProductInfo()
+                   {
+                       Id = p.ProductID,
+                       Name = p.Name,
+                       Price = p.ListPrice,
+                       Img = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto,
+                       Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description//.ProductDescription.Description
+                   }
+                );
+                //.Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang));
         }
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="template"></param>
+        /// <param name="template">Template to search</param>
         /// <param name="lang">language for product description</param>
         /// <returns></returns>
-        public IEnumerable<ProductInfo> Find(string template, string lang)
+        public /*dynamic*/IEnumerable<ProductInfo> Find(string template, string lang)
         {
             if (template == string.Empty || template == null)
                 throw new ArgumentException("Template parameter is null or empty");
 
-            return _db.Product
+            var result = _db.Product
                 .Where(p => p.Name.ToLower().Contains(template.ToLower()))
-                .Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang));
+                .Select(p =>
+                   new ProductInfo()
+                   {
+                       Id = p.ProductID,
+                       Name = p.Name,
+                       Price = p.ListPrice,
+                       Img = p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto,
+                       Description = p.ProductModel.ProductModelProductDescriptionCulture.Where(s => s.CultureID == "en").FirstOrDefault().ProductDescription.Description//.ProductDescription.Description
+                   }
+                );
+            //.ToList();
+            //.Select(p => new ProductInfo(p, p.ProductProductPhoto.FirstOrDefault().ProductPhoto.ThumbNailPhoto, lang));
+
+            return result;
+            //return new { amount = result.Count(), data = result };
+        }
+        public int FoundedAmount(string template, string lang)
+        {
+            return this.Find(template, lang).Count();
         }
         /// <summary>
         /// Returns the specified portion of founded info
@@ -127,7 +175,20 @@ namespace Model
         /// <returns></returns>
         public IEnumerable<ProductInfo> Find(string template, int portion, int startAt, string lang)
         {
-            return this.Find(template, lang)
+            // check startAt and Portion
+            var searchResult = this.Find(template, lang);
+
+            var dataAmount = searchResult.Count();
+
+            if (startAt > dataAmount)
+                throw new ArgumentOutOfRangeException("startAt", "position is out of boundary of the list of products");
+
+            if (dataAmount - startAt < portion)
+                portion = dataAmount - startAt;
+            //throw new ArgumentException("portion", "amount is out of boundary of the list of products");
+
+            //return new { amount = dataAmount, data = ((IEnumerable<ProductInfo>)searchResult.data).Skip(startAt).Take(portion) };
+            return this.Find(template, lang) // to list?
                 .Skip(startAt)
                 .Take(portion);
         }
