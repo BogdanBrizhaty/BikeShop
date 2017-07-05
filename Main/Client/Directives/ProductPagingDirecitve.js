@@ -6,13 +6,16 @@
             '<li ng-repeat="pageNum in pages"' +
             'ng-class="pageNum == currentPage ? \'active\' : \'\'">' +
             '<a ng-click="goToPage(pageNum)">{{pageNum}}</a></li>' +
-            '<li><a ng-click="showNextPages()" >&raquo;</a></li></ul>' +
-            '<div ng-bind="totalItems"></div>',
+            '<li><a ng-click="showNextPages()" >&raquo;</a></li></ul>',
         link: (scope, element) => {
             var pagesAmountToDisplay = 10;
 
             var getPages = (curPage) => {
                 var tmp = [];
+                if (scope.totalItems < 10)
+                {
+                    return [1];
+                }
                 var startAt = Math.ceil(curPage / pagesAmountToDisplay) * pagesAmountToDisplay - pagesAmountToDisplay + 1;
                 if (startAt + pagesAmountToDisplay - 1 > scope.totalPages) {
                     if (scope.totalPages - scope.pages[pagesAmountToDisplay - 1] == 0)

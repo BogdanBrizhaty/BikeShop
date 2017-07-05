@@ -16,7 +16,7 @@
                 if (path) {
                     angular.forEach(element.find('li'), function (li) {
                         var anchor = li.querySelector('a');
-                        console.log(anchor.href);
+                        //console.log(anchor.href);
                         if (anchor.href.match('#!' + path + '(?=\\?|$)')) {
                             angular.element(li).addClass('active');
                         } else {
