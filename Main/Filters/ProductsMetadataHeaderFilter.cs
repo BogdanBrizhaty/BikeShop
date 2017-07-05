@@ -7,6 +7,7 @@ using System.Web.Http.Filters;
 
 namespace Main.Filters
 {
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class ProductsMetadataHeaderFilter : ActionFilterAttribute
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)

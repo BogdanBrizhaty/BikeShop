@@ -12,14 +12,14 @@ namespace Main
         {
             // Web API configuration and services
             config.Filters.Add(new ProductsMetadataHeaderFilter());
-
+            //GlobalConfiguration.Configuration.DependencyResolver = new 
             // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { action="Get", id = RouteParameter.Optional }
+                defaults: new { id = RouteParameter.Optional }
             );
 
 
