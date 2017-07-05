@@ -28,12 +28,12 @@ textarea {
     border-top: none;
     border-bottom: none;
 }
-.left-border {
+/*.left-border {
     border-left: 1px solid lightgray;
 }
 .right-border {
     border-right: 1px solid lightgray;
-}
+}*/
 
 .row {
   display: -webkit-box;
