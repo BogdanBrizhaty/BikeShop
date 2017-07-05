@@ -1,11 +1,3 @@
 ﻿<div ng-controller="ProductListController">
-    <div class="row top-inside-free-space" ng-repeat="product in ProductList">
-        <div class="col-md-2 col-sm-2 col-xs-4 text-center"><img class="img-thumbnail" ng-src="data:image/jpg;base64,{{product.Img}}" /></div>
-        <div class="col-md-2 col-sm-2 col-xs-4 left-border text-left"><a class="btn-link" href="/#!/products/{{product.Id}}">{{product.Name}}</a></div>
-        <div class="col-md-1 col-sm-2 col-xs-2 left-border text-right"><span>{{product.Price}}</span></div>
-        <div class="col-md-7 col-sm-7 hidden-xs left-border text-center"><span>{{ (product.Description === null) ? "No description available" : product.Description}}</span></div>
-    </div>
-    <div class="text-center">
-        <product-paging></product-paging>
-    </div>
+    <ng-include src="'Client/Views/ProductsList.html'"></ng-include>
 </div>
