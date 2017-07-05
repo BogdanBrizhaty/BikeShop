@@ -19,7 +19,7 @@
         Controller: 'ProductsController'
     });
     $routeProvider.when('/search/:q', {
-        templateUrl: 'Client/Views/Search.html',
+        templateUrl: 'Client/Views/SearchResult.html',
         Controller: 'SearchController'
     });
 }])

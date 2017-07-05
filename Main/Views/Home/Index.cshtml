@@ -10,10 +10,10 @@
         <div>
             <div class="col-md-5 col-sm-6 col-xs-12">
                 <form class="navbar-form navbar-left ">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                    <div search-helper class="input-group">
+                        <input type="text" class="form-control" ng-model="q" placeholder="Search">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
+                            <button class="btn btn-default" ng-click="submitQuery()">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </div>
