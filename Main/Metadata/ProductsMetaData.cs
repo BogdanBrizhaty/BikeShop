@@ -6,28 +6,7 @@ using System.Web;
 
 namespace Main.Metadata
 {
-    public class HeadersMetadata<T>
-    {
-        protected Dictionary<string, T> _metadata;
-        public HeadersMetadata()
-        {
-            _metadata = new Dictionary<string, T>();
-        }
-        public void AddMetadata(string key, T data)
-        {
-            _metadata.Add(key, data);
-        }
-        public void RemoveMetada(string key)
-        {
-            _metadata.Remove(key);
-        }
-        public void AddMetadataToRequest(HttpRequestMessage request)
-        {
-            foreach (var record in _metadata)
-                request.Properties[record.Key] = record.Value;
-        }
-    }
-    public class ProductsMetaData : HeadersMetadata<int>
+    public class ProductsMetaData : BaseMetadata<int>
     {
         public ProductsMetaData(int items, int pages, int currentPage)
         {
