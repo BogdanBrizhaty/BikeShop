@@ -19,17 +19,17 @@ namespace Main.Controllers
         }
         // temporararily calling another ctor for DI hiding purposses
         // before nInject would be used
-        public ProductController()
-            :this(new ProductService())
-        {
+        //public ProductController()
+        //    : this(new ProductService())
+        //{
 
-        }
+        //}
 
         //[HttpGet]
         //[HttpHead]
         [AcceptVerbs("GET", "HEAD")]
         [Route("api/Products/page/{page}")]
-        [Route("api/Products/")]
+        //[Route("api/Products/")]
         public IEnumerable<ProductInfo> Get(uint page = 1, [FromUri]string lang = "en")
         {
             var _meta = new ProductsMetaData(_productService.Count, (_productService.Count / _perPage) + 1, (int)page);
